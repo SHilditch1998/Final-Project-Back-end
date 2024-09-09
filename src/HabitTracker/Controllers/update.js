@@ -1,4 +1,3 @@
-const { logger } = require("sequelize/lib/utils/logger");
 const Habit = require("../DataBase-Tracker/model/model");
 
 async function updateHabit(req,res) {
@@ -15,8 +14,6 @@ async function updateHabit(req,res) {
         console.log(error);
         res.status(404).json({message:"unable to update habit"})
         console.log("update failed");
-        
-        
     }
     
 }

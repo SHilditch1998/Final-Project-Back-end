@@ -1,5 +1,6 @@
 const SQLconnnection=require("../../../Users/DataBase/Connection");
 const {DataTypes}=require("sequelize");
+const Account = require("../../../Users/DataBase/Model/DucklingModel");
 
 const Habit =SQLconnnection.define("Habit",{
 
@@ -16,7 +17,7 @@ const Habit =SQLconnnection.define("Habit",{
         type:DataTypes.STRING,
         required:true,
         alllowNull:false,
-        unique:false
+        unique:true
     },
 
 
@@ -41,5 +42,12 @@ const Habit =SQLconnnection.define("Habit",{
     }
 
 });
-
+ 
+Habit.belongsTo(Account,
+     { as: "accounts", foreignKey: "Account_ID"}
+);
+Account.hasMany(Habit, 
+    { as: "habits", foreignKey: "Account_ID"}
+);
+ 
 module.exports=Habit

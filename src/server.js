@@ -9,7 +9,6 @@ const cors=require("cors");
 // User connections
 const Account = require("./Users/DataBase/Model/DucklingModel"); 
 const userRouters = require("./Users/Routes/AllRoutes");
-const { BelongsTo } = require("sequelize");
 
 // habit connections
 const Habit = require("./HabitTracker/DataBase-Tracker/model/model");
