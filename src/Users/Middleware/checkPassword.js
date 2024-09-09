@@ -7,19 +7,20 @@ const checkPassword=async (req,res,next) => {
         const textPassword=req.body.password;
     
 
-        const userDetails=await Account.findOne({
-
-            email:req.body.email
-        });
+        const userDetails=await Account.findOne({where:
+            {
+                email:req.body.email
+            }});
             
-            console.log(req.body.email);
-
+        
         console.log(userDetails);
 
         const hashedPassword=userDetails.password;
         console.log(hashedPassword);
+
         const check=await bcrypt.compare(textPassword,hashedPassword)
         console.log(check);
+        
         if(check === true){
             next()
         }else{

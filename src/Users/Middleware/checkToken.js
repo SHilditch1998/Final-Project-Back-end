@@ -1,5 +1,6 @@
 const jwt=require("jsonwebtoken")
-const Account = require("../DataBase/Model/DucklingModel")
+const Account = require("../DataBase/Model/DucklingModel");
+const { where } = require("sequelize");
 
 async function checkToken(req,res,next) {
     try {
@@ -7,7 +8,7 @@ async function checkToken(req,res,next) {
         const privateKey=process.env.JWT_KEY;
         const decodedToken= await jwt.verify(token,privateKey);
         const userEmail=decodedToken.email;
-        const checkAccountExsites= await Account.findOne({where:{email:req.body.email}});
+        const checkAccountExsites= await Account.findOne({where:{email:userEmail}})
         if(checkAccountExsites===false){
             throw new error(`you're Account doesn't exsit`)
         }else{

@@ -1,11 +1,19 @@
-const mongoose= require ("mongoose");
+const {Habit} = require("../../../HabitTracker/DataBase-Tracker/model/model");
+const SQLconnection=require("../Connection");
+const {DataTypes}=require("sequelize");
 
-const userSchema = new mongoose.Schema({
 
-    name:{type:String, require:false, unique:false},
-    username:{type:String, require:true, index:{unique:true}},
-    email:{type:String, require:true, unique:true},
-    password:{type:String, require:true, unique:false}  
+const Account=SQLconnection.define("Account",{
+    Account_ID:{type:DataTypes.BIGINT,autoIncrement:true,primaryKey:true,unique:true,allowNull:true},
+    username:{type:DataTypes.STRING,unique:true,allowNull:false},
+    name:{type:DataTypes.STRING,unique:false,allowNull:false},
+    email:{type:DataTypes.STRING,unique:false,allowNull:false},
+    password:{type:DataTypes.STRING,allowNull:false,unique:false}
 });
-const Account = mongoose.model('Account',userSchema);
+
+Account.hasMany(Habit,{
+    as:"habits",
+    foreignKey:'Account_ID'
+});
+
 module.exports=Account;

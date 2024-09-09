@@ -1,13 +1,45 @@
-const mongoose=require("mongoose");
+const SQLconnnection=require("../../../Users/DataBase/Connection");
+const {DataTypes}=require("sequelize");
 
-const HabitSchema=new mongoose.Schema({
-    habitId:{type:mongoose.Schema.Types.ObjectId ,required:true},
-    title:{type:string,required:true},
-    color:{type:string,required:true},
-    repeatMode:{type:String,enum:["Daily","weekly"],default:"daily"},
-    completed:{type:Object,default:{} },
-    createdAt:{type:Date,default:Date.now}
+const Habit =SQLconnnection.define("Habit",{
+
+    HabitId:
+    {
+        type:DataTypes.BIGINT,
+        autoIncrement:true,
+        primaryKey:true,
+        alllowNull:false
+    },
+
+    title:
+    {
+        type:DataTypes.STRING,
+        required:true,
+        alllowNull:false,
+        unique:false
+    },
+
+
+    color:
+    {
+        type: DataTypes.STRING,
+        alllowNull:false,
+        required:true,
+        unique:false
+    },
+
+
+    completed:
+    {
+        type:DataTypes.BOOLEAN,
+        defaultValue:false
+    },
+
+    Account_ID:
+    {
+        type:DataTypes.BIGINT
+    }
+
 });
-const Habit=mongoose.model("Habit",HabitSchema)
 
-module.exports=Habit;
+module.exports=Habit

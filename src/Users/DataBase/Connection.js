@@ -1,12 +1,10 @@
-const mongoose = require ("mongoose");
+const {sequelize,Sequelize}=require("sequelize");
+const SQLconnection=new Sequelize(process.env.MYSQL_URI);
 
-async function connection() {
-    try {
-        await mongoose.connect(process.env.MONGO_URI);
-        console.log(("Connected to the DuckBase"));
-    } catch (error) {
-        console.log(error)   
-    }
-}
-connection();
-
+try {
+    SQLconnection.authenticate();
+    console.log("successfully connectedto the database");
+} catch (error) {
+    console.log(error);
+};
+module.exports=SQLconnection;

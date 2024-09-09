@@ -2,7 +2,8 @@ const Account = require("../DataBase/Model/DucklingModel");
 
 const ListAccounts=async (req,res) => {
     try {
-        const listOfAllAccounts= await Account.find({});
+        const listOfAllAccounts= await Account.findAll({});
+
         res.status(200).json({message:"All Ducklings,🐤🐤🐤",
             ListAccounts:listOfAllAccounts})
     } catch (error) {

@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const Account = require("../DataBase/Model/DucklingModel");
 const bcrypt = require("bcrypt");
 
@@ -11,7 +12,7 @@ async function ChangePassword(req,res) {
     
         console.log(hashedNewPassword);
 
-        const result=await Account.updateOne({email:req.body.email},{password:hashedNewPassword})
+        const result=await Account.update({password:hashedNewPassword},{where:{email:req.body.email}})
         console.log(result);
 
         res.status(200).json({message:"Your password updated successfully",results:result})
