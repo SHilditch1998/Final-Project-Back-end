@@ -5,14 +5,15 @@ const Account=require("../DataBase/Model/DucklingModel");
 const checkPassword=async (req,res,next) => {
     try {
         const textPassword=req.body.password;
-    
-
+        console.log(textPassword);
+        console.log(req.body.email);
+        
         const userDetails=await Account.findOne({where:
             {
                 email:req.body.email
             }});
-            
         
+
         console.log(userDetails);
 
         const hashedPassword=userDetails.password;
